@@ -1,33 +1,7 @@
-'''
-[CS2] Wordle- Guess a five-letter secret word in at most six attempts.
-'''
 import random
-# To install colorama, run the following command in your VS Code terminal:
-# py -m pip install colorama
-#from colorama import Fore, Back, Style, init
-#init(autoreset=True) #Ends color formatting after each print statement
 from wordle_wordlist import get_word_list
 
 def get_feedback(guess: str, secret_word: str) -> str:
-    '''Generates a feedback string based on comparing a 5-letter guess with the secret word. 
-       The feedback string uses the following schema: 
-        - Correct letter, correct spot: uppercase letter ('A'-'Z')
-        - Correct letter, wrong spot: lowercase letter ('a'-'z')
-        - Letter not in the word: '-'
-
-       For example:
-        - get_feedback("lever", "EATEN") --> "-e-E-"
-        - get_feedback("LEVER", "LOWER") --> "L--ER"
-        - get_feedback("MOMMY", "MADAM") --> "M-m--"
-        - get_feedback("ARGUE", "MOTTO") --> "-----"
-
-        Args:
-            guess (str): The guessed word
-            secret_word (str): The secret word
-        Returns:
-            str: Feedback string, based on comparing guess with the secret word
-    '''
-    #edge cases
     guessUpper = guess.upper()
     guessList = list(guessUpper) #turn guess into list so we can check with secret word later
     secretList = list(secret_word)
@@ -44,7 +18,6 @@ def get_feedback(guess: str, secret_word: str) -> str:
             else:
                 feedBack.append("-") #else the letter doesn't match so feedback there is empty
 
-        #
         for i in range(len(guessList)):
             #feedback only has "-" if the letter position isn't the same 
             if feedBack[i] == "-":
@@ -69,14 +42,6 @@ confirmed_list = ['-','-','-','-','-']
 lowercase_set = set()
 
 def get_AI_guess(guesses: list[str], feedback: list[str]) -> str:
-    '''Analyzes feedback from previous guesses (if any) to make a new guess
-        Args:
-            word_list (list): A list of potential Wordle words
-            guesses (list): A list of string guesses, could be empty
-            feedback (list): A list of feedback strings, could be empty
-        Returns:
-         str: a valid guess that is exactly 5 uppercase letters
-    '''
     global word_list_global, invalid_indexes, scrabble_dict, confirmed_list
     deleted = set() #so we dont need to check these words again. saves time
     max_score = 0 #best score becomes guess
@@ -121,7 +86,6 @@ def get_AI_guess(guesses: list[str], feedback: list[str]) -> str:
 
 
 
-# TODO: Define and implement your own functions!
 def start_game():
     print("WELCOME TO WORDLE")
     num_guesses = 0
@@ -187,7 +151,6 @@ def ai_game():
     else: return 7
 
 if __name__ == "__main__":
-    # TODO: Write your own code to call your functions here
     #start_game()
     
     total_guesses = 0
